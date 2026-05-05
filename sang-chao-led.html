@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bảng LED Cháo Sáng</title>
+
+<style>
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    background: #000;
+    color: #fff;
+    font-family: Georgia, "Times New Roman", serif;
+  }
+
+  body {
+    width: 100%;
+    min-height: 100vh;
+  }
+
+  .slide {
+    width: 1366px;
+    height: 768px;
+    min-width: 1366px;
+    min-height: 768px;
+    max-width: 1366px;
+    max-height: 768px;
+    background: #000;
+    color: #fff;
+    box-sizing: border-box;
+    overflow: hidden;
+    margin: 0 auto 40px;
+    border: 1px solid #d9d9d9;
+  }
+
+  .sc-title {
+    color: #00f078;
+    font-weight: 900;
+    letter-spacing: -1.8px;
+    white-space: nowrap;
+  }
+
+  .sc-date {
+    color: #ff35d8;
+    font-weight: 900;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  /* ================= SLIDE 1 ================= */
+
+  .sang-chao-slide-1 {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sc1-title-row {
+    height: 106px;
+    display: grid;
+    grid-template-columns: 1fr 205px;
+    border-bottom: 1px solid #d9d9d9;
+    box-sizing: border-box;
+    align-items: center;
+  }
+
+  .sc1-title-row .sc-title {
+    font-size: 44px;
+    line-height: 1;
+    padding-left: 7px;
+    padding-top: 8px;
+  }
+
+  .sc1-title-row .sc-date {
+    font-size: 43px;
+    line-height: 1;
+    padding-top: 8px;
+  }
+
+  .sc1-body {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .sc1-panel {
+    position: relative;
+    box-sizing: border-box;
+    padding: 24px 9px 0 9px;
+    border-right: 1px solid #d9d9d9;
+  }
+
+  .sc1-panel:last-child {
+    border-right: 0;
+  }
+
+  .sc1-panel-title {
+    font-size: 61px;
+    font-weight: 900;
+    line-height: 1;
+    margin: 0 0 42px 0;
+    letter-spacing: -1.5px;
+    white-space: nowrap;
+  }
+
+  .sc1-head {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    color: #ff2d12;
+    font-size: 50px;
+    font-weight: 900;
+    line-height: 1.05;
+    margin-bottom: 70px;
+    letter-spacing: -1.2px;
+  }
+
+  .sc1-head > div:last-child {
+    text-align: center;
+  }
+
+  .sc1-head span {
+    font-size: 49px;
+  }
+
+  .sc1-row {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    align-items: center;
+    font-size: 62px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -1.6px;
+    margin-bottom: 88px;
+  }
+
+  .sc1-row > div:last-child {
+    text-align: center;
+  }
+
+  .sc1-panel:nth-child(2) .sc1-panel-title {
+    font-size: 58px;
+  }
+
+  /* ================= SLIDE 2 + 3 ================= */
+
+  .sang-chao-slide-2 {
+    padding: 0;
+  }
+
+  .sc2-table {
+    width: 100%;
+    height: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+
+  .sc2-table th,
+  .sc2-table td {
+    border: 1px solid #d9d9d9;
+    box-sizing: border-box;
+    font-weight: 900;
+    vertical-align: middle;
+  }
+
+ .sc2-title-row {
+  height: 95px;
+}
+
+
+  .sc2-title-row .sc-title {
+    font-size: 40px;
+    line-height: 1;
+    text-align: left;
+    padding: 10px 0 0 8px;
+  }
+
+  .sc2-title-row .sc-date {
+    font-size: 40px;
+    line-height: 1;
+    padding-top: 8px;
+  }
+
+  .sc2-head-row {
+    height: 82px;
+  }
+
+  .sc2-head-row th {
+    color: #ff2d12;
+    font-size: 38px;
+    line-height: 1;
+    text-align: center;
+    padding: 0;
+    letter-spacing: -1px;
+  }
+
+  .sc2-section {
+    height: 78px;
+  }
+
+  .sc2-section td {
+    color: #00f078;
+    font-size: 39px;
+    line-height: 1;
+    text-align: left;
+    padding: 8px 0 0 8px;
+    letter-spacing: -1px;
+  }
+
+  .sc2-data-row {
+    height: 78px;
+  }
+
+  .sc2-data-row td {
+    color: #fff;
+    font-size: 39px;
+    line-height: 1;
+    padding: 0 14px 0 8px;
+    letter-spacing: -1px;
+  }
+
+  .sc2-data-row td:first-child {
+    text-align: left;
+  }
+
+  .sc2-data-row td:not(:first-child) {
+    text-align: right;
+    font-size: 43px;
+    padding-right: 18px;
+  }
+
+  /* ================= SLIDE 4 - ĐỒ KHÔ SÁNG GV ================= */
+
+  .sang-do-kho-slide {
+    padding: 0;
+  }
+
+  .sdk-table {
+    width: 100%;
+    height: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+
+  .sdk-table th,
+  .sdk-table td {
+    border: 1px solid #d9d9d9;
+    box-sizing: border-box;
+    font-weight: 900;
+    vertical-align: middle;
+  }
+
+  .sdk-title-row {
+    height: 92px;
+  }
+
+  .sdk-title-row .sc-title {
+    font-size: 40px;
+    line-height: 1;
+    text-align: left;
+    padding: 8px 0 0 8px;
+  }
+
+  .sdk-title-row .sc-date {
+    font-size: 40px;
+    line-height: 1;
+    padding-top: 8px;
+  }
+
+  .sdk-head-1 {
+    height: 62px;
+  }
+
+  .sdk-head-2 {
+    height: 48px;
+  }
+  .sdk-data-row span {
+  display: inline-block;
+  margin-top: 0;
+  color: #ffe928;
+  font-size: 40px;
+}
+
+  .sdk-head-1 th {
+    color: #ff2d12;
+    font-size: 25px;
+    line-height: 1.05;
+    text-align: center;
+    padding: 2px 4px;
+    letter-spacing: -0.6px;
+  }
+
+  .sdk-head-2 th {
+    color: #fff;
+    font-size: 20px;
+    line-height: 1;
+    text-align: center;
+    padding: 0;
+  }
+
+    .sdk-data-row {
+    height: 130px;
+  }
+
+  .sdk-data-row td {
+    color: #fff;
+    font-size: 31px;
+    line-height: 1.05;
+    padding: 4px 6px;
+    letter-spacing: -0.8px;
+    text-align: center;
+  }
+
+  .sdk-data-row td:first-child {
+    text-align: left;
+    color: #fff;
+    font-size: 34px;
+  }
+
+  .sdk-data-row td:nth-child(2) {
+    color: #fff;
+    font-size: 31px;
+  }
+
+  .sdk-data-row span {
+    display: inline-block;
+    margin-top: 10px;
+    color: #ffe928;
+    font-size: 34px;
+  }
+
+  @media screen and (max-width: 1366px) {
+    body {
+      overflow: auto;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<section class="slide sang-chao-slide-1">
+  <div class="sc1-title-row">
+    <div class="sc-title">BẢNG NGUYÊN LIỆU CHÁO TRẮNG, SÚP THỊT HEO</div>
+    <div class="sc-date">2026-05-05</div>
+  </div>
+
+  <div class="sc1-body">
+    <div class="sc1-panel">
+      <div class="sc1-panel-title">Cháo trắng</div>
+      <div class="sc1-head">
+        <div>Nguyên liệu</div>
+        <div>Khối lượng<br><span>( Kg )</span></div>
+      </div>
+      
+        <div class="sc1-row">
+          <div>Gạo</div>
+          <div>10,5</div>
+        </div>
+      
+        <div class="sc1-row">
+          <div>Nước</div>
+          <div>52,5</div>
+        </div>
+      
+    </div>
+
+    <div class="sc1-panel">
+      <div class="sc1-panel-title">Súp thịt heo xay nấu cháo</div>
+      <div class="sc1-head">
+        <div>Nguyên liệu</div>
+        <div>Khối lượng<br><span>( Kg )</span></div>
+      </div>
+      
+        <div class="sc1-row">
+          <div>Thịt heo xay</div>
+          <div>6,9</div>
+        </div>
+      
+        <div class="sc1-row">
+          <div>Nước</div>
+          <div>21,0</div>
+        </div>
+      
+    </div>
+  </div>
+</section>
+
+<section class="slide sang-chao-slide-2">
+  <table class="sc2-table">
+    <colgroup>
+      <col style="width:36%">
+      <col style="width:19%">
+      <col style="width:25%">
+      <col style="width:20%">
+    </colgroup>
+
+    <thead>
+      <tr class="sc2-title-row">
+        <th colspan="3" class="sc-title">BẢNG NGUYÊN LIỆU CHÁO XAY, ỐNG ĂN SÁNG</th>
+        <th class="sc-date">2026-05-05</th>
+      </tr>
+      <tr class="sc2-head-row">
+        <th></th>
+        <th>Cụm Gò Vấp</th>
+        <th>Cụm Bình Mỹ</th>
+        <th>Tổng</th>
+      </tr>
+    </thead>
+
+    <tbody>
+     
+        <tr class="sc2-data-row">
+          <td>Cháo thịt bằm ăn sáng</td>
+          <td>11,1</td>
+          <td>16,3</td>
+          <td>27,4</td>
+        </tr>
+      
+
+      
+        <tr class="sc2-section">
+          <td colspan="4">Cháo (ống xay) ăn sáng</td>
+        </tr>
+        
+          <tr class="sc2-data-row">
+            <td>Cháo thịt bằm</td>
+            <td>11,0</td>
+            <td>8,7</td>
+            <td>19,7</td>
+          </tr>
+        
+          <tr class="sc2-data-row">
+            <td>Nước sôi đã nêm gia vị</td>
+            <td>6,0</td>
+            <td>4,8</td>
+            <td>10,8</td>
+          </tr>
+        
+      
+        <tr class="sc2-section">
+          <td colspan="4">Xay ăn sáng</td>
+        </tr>
+        
+          <tr class="sc2-data-row">
+            <td>Cháo thịt bằm</td>
+            <td>12,4</td>
+            <td>19,8</td>
+            <td>32,2</td>
+          </tr>
+        
+          <tr class="sc2-data-row">
+            <td>Cơm</td>
+            <td>2,0</td>
+            <td>3,2</td>
+            <td>5,2</td>
+          </tr>
+        
+      
+    </tbody>
+  </table>
+</section>
+
+<section class="slide sang-main-dish sang-chao-slide-2">
+  <table class="sc2-table">
+    <colgroup>
+      <col style="width:36%">
+      <col style="width:19%">
+      <col style="width:25%">
+      <col style="width:20%">
+    </colgroup>
+
+    <thead>
+      <tr class="sc2-title-row">
+        <th colspan="3" class="sc-title">BẢNG NGUYÊN LIỆU BỮA SÁNG</th>
+        <th class="sc-date">2026-05-05</th>
+      </tr>
+      <tr class="sc2-head-row">
+        <th>NGUYÊN LIỆU</th>
+        <th>GÒ VẤP</th>
+        <th>BÌNH MỸ</th>
+        <th>Phở gà</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      
+        <tr class="sc2-data-row">
+          <td>BÁNH PHỞ KHÔ</td>
+          <td>7,3</td>
+          <td>7,1</td>
+          <td>14,5</td>
+        </tr>
+      
+        <tr class="sc2-data-row">
+          <td>PHI LÊ GÀ</td>
+          <td>7,3</td>
+          <td>7,1</td>
+          <td>14,5</td>
+        </tr>
+      
+        <tr class="sc2-data-row">
+          <td>HÀNH TÂY</td>
+          <td>3,1</td>
+          <td>3,1</td>
+          <td>6,2</td>
+        </tr>
+      
+        <tr class="sc2-data-row">
+          <td>HÀNH LÁ</td>
+          <td>0,4</td>
+          <td>0,4</td>
+          <td>0,8</td>
+        </tr>
+      
+        <tr class="sc2-data-row">
+          <td>NGÒ RÍ</td>
+          <td>0,4</td>
+          <td>0,4</td>
+          <td>0,8</td>
+        </tr>
+      
+        <tr class="sc2-data-row">
+          <td>Nước</td>
+          <td>52,5</td>
+          <td>51,0</td>
+          <td>103,5</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</section>
+
+<section class="slide sang-do-kho-slide">
+  <table class="sdk-table">
+    <colgroup>
+      <col style="width:23%">
+      <col style="width:8%">
+      <col style="width:14%">
+      <col style="width:14%">
+      <col style="width:14%">
+      <col style="width:14%">
+      <col style="width:13%">
+    </colgroup>
+
+    <thead>
+      <tr class="sdk-title-row">
+        <th colspan="6" class="sc-title">BẢNG NGUYÊN LIỆU KHÔ BỮA SÁNG CỤM GÒ VẤP</th>
+        <th class="sc-date">2026-05-05</th>
+      </tr>
+
+      <tr class="sdk-head-1">
+        <th rowspan="2">ĐỒ KHÔ</th>
+        <th rowspan="2">ĐỊNH<br>MỨC</th>
+        <th>THẠNH LỘC</th>
+        <th>GOLD - DQH</th>
+        <th>TRUNG XUÂN THU - NT</th>
+        <th>CARE - AH</th>
+        <th>TỔNG</th>
+      </tr>
+
+      <tr class="sdk-head-2">
+         <th>KL (kg)</th>
+  <th>KL (kg)</th>
+  <th>KL (kg)</th>
+  <th>KL (kg)</th>
+  <th>KL (kg)</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      
+        <tr class="sdk-data-row">
+          <td>BÁNH PHỞ KHÔ</td>
+          <td>35g</td>
+<td><span>0,9 </span></td>
+<td><span>3,7 </span></td>
+<td><span>1,1 </span></td>
+<td><span>1,7 </span></td>
+<td><span>7,4 </span></td>
+        </tr>
+      
+        <tr class="sdk-data-row">
+          <td>NUI ỐNG NHỎ</td>
+          <td>40g</td>
+<td><span>1,1 </span></td>
+<td><span>4,2 </span></td>
+<td><span>1,2 </span></td>
+<td><span>1,9 </span></td>
+<td><span>8,4 </span></td>
+        </tr>
+      
+        <tr class="sdk-data-row">
+          <td>MÌ TRẦN KHÔNG GIA VỊ</td>
+          <td>35g</td>
+<td><span>0,9 </span></td>
+<td><span>3,7 </span></td>
+<td><span>1,1 </span></td>
+<td><span>1,7 </span></td>
+<td><span>7,4 </span></td>
+        </tr>
+      
+        <tr class="sdk-data-row">
+          <td>BÚN KHÔ</td>
+          <td>35g</td>
+<td><span>0,9 </span></td>
+<td><span>3,7 </span></td>
+<td><span>1,1 </span></td>
+<td><span>1,7 </span></td>
+<td><span>7,4 </span></td>
+        </tr>
+      
+    </tbody>
+  </table>
+</section>
+</body>
+</html>
