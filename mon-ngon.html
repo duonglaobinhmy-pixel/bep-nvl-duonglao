@@ -1,1 +1,193 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Món ngon cuối tuần</title>
 
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    background: #000;
+    color: #fff;
+    font-family: Arial, Roboto, sans-serif;
+  }
+
+  .slide {
+    width: 1366px;
+    height: 768px;
+    padding: 22px 28px;
+    page-break-after: always;
+    overflow: hidden;
+    background: #000;
+  }
+
+  .title {
+    text-align: center;
+    font-size: 34px;
+    font-weight: 900;
+    color: #00f078;
+    letter-spacing: .5px;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+
+  .date {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 800;
+    color: #ff35d8;
+    margin-bottom: 14px;
+  }
+
+  .section-title {
+    font-size: 24px;
+    font-weight: 900;
+    color: #ffe928;
+    margin: 12px 0 6px;
+    text-transform: uppercase;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    margin-bottom: 10px;
+  }
+
+  th {
+    background: #ff2d12;
+    color: #fff;
+    font-size: 20px;
+    padding: 8px 6px;
+    border: 2px solid #fff;
+    text-align: center;
+    font-weight: 900;
+  }
+
+  td {
+    font-size: 20px;
+    padding: 7px 6px;
+    border: 2px solid #fff;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: 700;
+  }
+
+  .name {
+    text-align: left;
+    font-weight: 900;
+    color: #ffe928;
+  }
+
+  .stt {
+    width: 60px;
+  }
+
+  .num {
+    width: 120px;
+    text-align: center;
+  }
+
+  .unit {
+    width: 90px;
+  }
+
+  .cell-main {
+    font-size: 20px;
+    font-weight: 900;
+    color: #fff;
+  }
+
+  .cell-sub {
+    font-size: 16px;
+    color: #ffe928;
+    margin-top: 2px;
+  }
+
+  .cell-noi {
+    font-size: 14px;
+    color: #00f078;
+    margin-top: 2px;
+  }
+
+  .menu-table th,
+  .menu-table td {
+    font-size: 16px;
+    padding: 5px 4px;
+  }
+
+  .menu-table .name {
+    font-size: 17px;
+  }
+
+  .empty {
+    text-align: center;
+    color: #aaa;
+    font-size: 24px;
+    padding: 40px;
+  }
+
+  .empty.big {
+    margin-top: 180px;
+    font-size: 36px;
+    font-weight: 900;
+  }
+</style>
+</head>
+
+<body>
+  
+    <section class="slide">
+      <div class="title">BẢNG RAU MÓN NGON CUỐI TUẦN</div>
+      <div class="date"></div>
+
+      <table>
+        <thead>
+          <tr>
+            <th class="stt">STT</th>
+            <th>Nguyên liệu rau</th>
+            <th class="num">Tổng</th>
+            <th class="unit">ĐVT</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td colspan="4" class="empty">Không có dữ liệu món ngon</td></tr>
+        </tbody>
+      </table>
+    </section>
+  
+  
+    <section class="slide">
+      <div class="title">BẢNG NGUYÊN LIỆU MÓN NGON CUỐI TUẦN</div>
+      <div class="date"></div>
+
+      <table>
+        <thead>
+          <tr>
+            <th class="stt">STT</th>
+            <th>Nguyên liệu</th>
+            <th>Nhóm</th>
+            <th class="num">Tổng</th>
+            <th class="unit">ĐVT</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td colspan="5" class="empty">Không có dữ liệu món ngon</td></tr>
+        </tbody>
+      </table>
+    </section>
+  
+  
+    <section class="slide">
+      <div class="title">BẢNG KHẨU PHẦN MÓN NGON CUỐI TUẦN</div>
+      <div class="date"></div>
+      <div class="empty big">Không có dữ liệu khẩu phần món ngon</div>
+    </section>
+  
+</body>
+</html>
