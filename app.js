@@ -133,6 +133,24 @@ function classifySlide(slideHtml) {
     if (slide.classList.contains('sang-chao-slide-2')) {
       return 'sang_chao_xay_ong';
     }
+      // MÓN NGON CUỐI TUẦN
+  if (slide.classList.contains('mon-ngon-rau-slide')) {
+    return 'mon_ngon_rau';
+  }
+
+  if (slide.classList.contains('mon-ngon-ingredient-slide')) {
+    if (hasAny('TRUA')) return 'mon_ngon_ingredient_trua';
+    if (hasAny('SANG')) return 'mon_ngon_ingredient_sang';
+    if (hasAny('CHIEU')) return 'mon_ngon_ingredient_chieu';
+    if (hasAny('XE')) return 'mon_ngon_ingredient_xe';
+    return 'mon_ngon_ingredient';
+  }
+
+  if (slide.classList.contains('mon-ngon-menu-slide')) {
+    if (hasAny('CUM GO VAP')) return 'mon_ngon_menu_trua_govap';
+    if (hasAny('CUM BINH MY')) return 'mon_ngon_menu_trua_binhmy';
+    return 'mon_ngon_menu_trua';
+  }
   
   
     if (
@@ -340,9 +358,11 @@ function orderSlides(allSlides) {
       .sort((a, b) => a.index - b.index)
       .map(x => x.slideHtml);
   };
+  const hasMonNgonIngredientTrua = (buckets.get('mon_ngon_ingredient_trua') || []).length > 0;
 
 const ordered = [
   ...takeAll('rau'),
+  ...takeAll('mon_ngon_rau'),
   ...takeAll('sang_chao_loi'),
   ...takeAll('sang_chao_xay_ong'),
   ...takeAll('sang_main_dish'),
@@ -353,7 +373,10 @@ const ordered = [
 
   ...takeAll('xao_trua'),
   ...takeAll('ingredient_trua_xay'),
-  ...takeAll('ingredient_trua_main'),
+  ...(hasMonNgonIngredientTrua
+    ? takeAll('mon_ngon_ingredient_trua')
+    : takeAll('ingredient_trua_main')
+  ),
 
   // full trưa + 2 bảng cắt GV, rồi full trưa + 2 bảng cắt BM
   ...takeAll('menu_trua_govap'),
@@ -1029,8 +1052,9 @@ async function loadDeck() {
   const app = document.getElementById('app');
 
   try {
-    const [rauHtml, sangChaoHtml, ingredientHtml, menuHtml, xaoHtml, xeHtml, weeklyMenuHtml] = await Promise.all([
+    const [rauHtml, monNgonHtml, sangChaoHtml, ingredientHtml, menuHtml, xaoHtml, xeHtml, weeklyMenuHtml] = await Promise.all([
       fetchText('./rau.html'),
+      fetchText('./mon-ngon.html').catch(() => ''),
       fetchText('./sang-chao-led.html'),
       fetchText('./ingredient.html'),
       fetchText('./menu.html'),
@@ -1042,6 +1066,7 @@ async function loadDeck() {
 
     const allSlides = [
       ...splitSlidesFromHtml(rauHtml),
+      ...splitSlidesFromHtml(monNgonHtml),
       ...splitSlidesFromHtml(sangChaoHtml),
       ...splitSlidesFromHtml(ingredientHtml),
       ...splitSlidesFromHtml(menuHtml),
