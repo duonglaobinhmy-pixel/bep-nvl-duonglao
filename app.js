@@ -1080,7 +1080,17 @@ async function loadDeck() {
 
     const allSlides = [
       ...splitSlidesFromHtml(rauHtml),
-      ...splitSlidesFromHtml(monNgonHtml),
+      ...splitSlidesFromHtml(monNgonHtml).filter(s => {
+        const t = extractTextFromSlideHtml(s);
+        if (t.includes(normalizeText('KHONG CO DU LIEU RAU MON NGON'))) return false;
+        if (t.includes(normalizeText('KHONG CO DU LIEU MON NGON'))) return false;
+        return t.includes(normalizeText('BANH UOT')) ||
+               t.includes(normalizeText('CHAO GOI GA')) ||
+               t.includes(normalizeText('BUN NEM')) ||
+               t.includes(normalizeText('CA RI')) ||
+               t.includes(normalizeText('COM GOI GA')) ||
+               t.includes(normalizeText('BUN THIT LUOC'));
+      }),
       ...splitSlidesFromHtml(sangChaoHtml),
       ...splitSlidesFromHtml(ingredientHtml),
       ...splitSlidesFromHtml(menuHtml),
