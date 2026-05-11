@@ -360,46 +360,60 @@ function orderSlides(allSlides) {
   };
   const hasMonNgonIngredientTrua = (buckets.get('mon_ngon_ingredient_trua') || []).length > 0;
 
-const ordered = [
-  ...takeAll('rau'),
-  ...takeAll('mon_ngon_rau'),
-  ...takeAll('sang_chao_loi'),
-  ...takeAll('sang_chao_xay_ong'),
-  ...takeAll('sang_main_dish'),
-  ...takeAll('sang_do_kho_gv'),
-
-  ...takeAll('menu_sang_govap'),
-  ...takeAll('menu_sang_binhmy'),
-
-  ...takeAll('xao_trua'),
-  ...takeAll('ingredient_trua_xay'),
-  ...(hasMonNgonIngredientTrua
-    ? takeAll('mon_ngon_ingredient_trua')
-    : takeAll('ingredient_trua_main')
-  ),
-
-  // full trưa + 2 bảng cắt GV, rồi full trưa + 2 bảng cắt BM
-  ...takeAll('menu_trua_govap'),
-  ...takeAll('menu_trua_binhmy'),
-
-  ...takeAll('ingredient_chieu_xay'),
-  ...takeAll('ingredient_chieu_main'),
-
-  // full chiều + 2 bảng cắt GV, rồi full chiều + 2 bảng cắt BM
-  ...takeAll('menu_chieu_govap'),
-  ...takeAll('menu_chieu_binhmy'),
-
-  ...takeAll('xe'),
-  ...takeAll('weekly_menu')
-].filter(Boolean);
+  const ordered = [
+    ...takeAll('rau'),
+    ...takeAll('mon_ngon_rau'),
+  
+    ...takeAll('sang_chao_loi'),
+    ...takeAll('sang_chao_xay_ong'),
+    ...takeAll('sang_main_dish'),
+    ...takeAll('sang_do_kho_gv'),
+  
+    ...takeAll('menu_sang_govap'),
+    ...takeAll('menu_sang_binhmy'),
+  
+    ...takeAll('xao_trua'),
+    ...takeAll('ingredient_trua_xay'),
+  
+    ...(hasMonNgonIngredientTrua
+      ? takeAll('mon_ngon_ingredient_trua')
+      : takeAll('ingredient_trua_main')
+    ),
+  
+    ...takeAll('menu_trua_govap'),
+    ...takeAll('mon_ngon_menu_trua_govap'),
+  
+    ...takeAll('menu_trua_binhmy'),
+    ...takeAll('mon_ngon_menu_trua_binhmy'),
+  
+    ...takeAll('ingredient_chieu_xay'),
+    ...takeAll('ingredient_chieu_main'),
+  
+    ...takeAll('menu_chieu_govap'),
+    ...takeAll('menu_chieu_binhmy'),
+  
+    ...takeAll('xe'),
+    ...takeAll('weekly_menu')
+  ].filter(Boolean);
 
   const leftovers = [];
   for (const [type, arr] of buckets.entries()) {
     if (type === 'empty_xe') continue;
-    if (type === 'ingredient_sang') continue; // ẨN luôn bảng sáng cũ
+    if (type === 'ingredient_sang') continue;
+  
+    // Nếu có nguyên liệu món ngon trưa thì ẩn bảng nguyên liệu trưa thường
+    if (hasMonNgonIngredientTrua && type === 'ingredient_trua_main') continue;
+  
+    // Những slide món ngon đã được đưa đúng vị trí rồi, không cho rớt xuống cuối
+    if ([
+      'mon_ngon_rau',
+      'mon_ngon_ingredient_trua',
+      'mon_ngon_menu_trua_govap',
+      'mon_ngon_menu_trua_binhmy'
+    ].includes(type)) continue;
+  
     for (const item of arr) leftovers.push(item);
   }
-
   console.log('CLASSIFIED SLIDES:', classified.map((x) => ({
     index: x.index,
     type: x.type,
