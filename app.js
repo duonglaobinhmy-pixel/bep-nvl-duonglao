@@ -1081,15 +1081,25 @@ async function loadDeck() {
     const allSlides = [
       ...splitSlidesFromHtml(rauHtml),
       ...splitSlidesFromHtml(monNgonHtml).filter(s => {
+        const wrap = document.createElement('div');
+        wrap.innerHTML = s;
+        const slide = wrap.querySelector('section.slide, div.slide');
         const t = extractTextFromSlideHtml(s);
+      
+        if (!slide) return false;
+      
+        // Bỏ HTML rỗng / placeholder
+        if (!t) return false;
         if (t.includes(normalizeText('KHONG CO DU LIEU RAU MON NGON'))) return false;
         if (t.includes(normalizeText('KHONG CO DU LIEU MON NGON'))) return false;
-        return t.includes(normalizeText('BANH UOT')) ||
-               t.includes(normalizeText('CHAO GOI GA')) ||
-               t.includes(normalizeText('BUN NEM')) ||
-               t.includes(normalizeText('CA RI')) ||
-               t.includes(normalizeText('COM GOI GA')) ||
-               t.includes(normalizeText('BUN THIT LUOC'));
+      
+        // Chỉ cần có class món ngon là nhận
+        if (slide.classList.contains('mon-ngon-rau-slide')) return true;
+        if (slide.classList.contains('mon-ngon-ingredient-slide')) return true;
+        if (slide.classList.contains('mon-ngon-menu-slide')) return true;
+      
+        // fallback theo title
+        return t.includes(normalizeText('MON NGON'));
       }),
       ...splitSlidesFromHtml(sangChaoHtml),
       ...splitSlidesFromHtml(ingredientHtml),
