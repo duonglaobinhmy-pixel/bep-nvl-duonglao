@@ -112,8 +112,8 @@ function classifySlide(slideHtml) {
 
   const hasMenuGrid = !!slide.querySelector('table.menu-grid');
   const hasXaoGrid = !!slide.querySelector('table.xao-grid');
-  const hasRauGrid = !!slide.querySelector('table.grid');
-  const isMainIngredientSlide = slide.classList.contains('slide-main');
+  const hasRauGrid = !!slide.querySelector('table.grid, table.rau-grid');
+    const isMainIngredientSlide = slide.classList.contains('slide-main');
   const isTableIngredientSlide = slide.classList.contains('slide-xay');
   const isXeSlide =
     hasAny('BANG NGUYEN LIEU CHO MON XE', 'NGUYEN LIEU CHO MON XE') ||
